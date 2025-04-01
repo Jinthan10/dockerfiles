@@ -1,9 +1,7 @@
-FROM komljen/ubuntu
-MAINTAINER Alen Komljen <alen.komljen@live.com>
 
-RUN \
-  apt-get update && \
-  apt-get -y install \
-          apache2 && \
-  rm /var/www/html/index.html && \
-  rm -rf /var/lib/apt/lists/*
+FROM tomcat:latest
+ENV CATALINA_HOME /usr/local/tomcat
+ENV CATALINA_BASE /usr/local/tomcat
+COPY your-app.war /usr/local/tomcat/webapps/
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
